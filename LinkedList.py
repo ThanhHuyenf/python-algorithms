@@ -3,6 +3,7 @@ class Node:
     self.value = value
     self.next = None
 
+
 class LinkedList:
   def __init__(self, value):
     new_node = Node(value)
@@ -80,9 +81,9 @@ class LinkedList:
     return False
 
   def insert(self, index, value):
-    if index< 0 or index > self.length:
+    if index < 0 or index > self.length:
       return False
-    if index ==0:
+    if index == 0:
       return self.prepend(value)
     if index == self.length:
       return self.append(value)
@@ -94,9 +95,9 @@ class LinkedList:
     return True
 
   def remove(self, index):
-    if index< 0 or index > self.length:
+    if index < 0 or index > self.length:
       return False
-    if index ==0:
+    if index == 0:
       return self.pop_first()
     if index == self.length:
       return self.pop()
@@ -116,11 +117,25 @@ class LinkedList:
     after = temp.next
     before = None
     for _ in range(self.length):
-        after = temp.next
-        temp.next = before
-        before = temp
-        temp = after
+      after = temp.next
+      temp.next = before
+      before = temp
+      temp = after
     return True
+
+  def remove_duplicates(self):
+    values = set()
+    previous = None
+    current = self.head
+    while current:
+      if current.value in values:
+        previous.next = current.next
+        self.length -= 1
+      else:
+        values.add(current.value)
+        previous = current
+      current = current.next
+
 
 my_linked_list = LinkedList(11)
 my_linked_list.append(3)
